@@ -1,6 +1,6 @@
 # NOKI
 
-Noki is a hacking tools
+Noki is a combination of hacking tools
 
 ## Objective
 
