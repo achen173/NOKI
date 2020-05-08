@@ -1,10 +1,10 @@
 # NOKI
 
-Noki is a hacking tools
+Noki is a combination of hacking tools
 
 ## Objective
 
-We hope to create a program that interfaces with multiple hacking tools in an user friendly way. This is meant for educational purposes only and the author is not responsible for any damage. Remember that any consensual hacks are considered illegal. 
+We hope to create a program that interfaces with multiple hacking tools in an user friendly way. This is meant for educational purposes only and the author is not responsible for any damage. Remember that any nonconsensual hacks are considered illegal. 
 
 ## Development
 
@@ -23,4 +23,5 @@ cd NOKI
 pip3 install -r requirements.txt
 python3 main.py
 ```
-## Example Usage
+## Example
+![](https://github.com/achen173/NOKI/blob/master/Images/Interface.PNG)
