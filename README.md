@@ -23,4 +23,5 @@ cd NOKI
 pip3 install -r requirements.txt
 python3 main.py
 ```
-## Example Usage
+## Example
+![](https://github.com/achen173/NOKI/blob/master/Images/Interface.PNG)
