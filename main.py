@@ -2,10 +2,7 @@ import os
 import random
 import time
 import sys
-from metadata.docx_parser import Alan
-import zipfile
-import xml.etree.ElementTree as ET
-import re
+from metadata import Metadata
 
 logo = ("""
 
@@ -44,11 +41,14 @@ lib_list = {"help": "list of valid commands",
             "aircrack-ng":"wireless password cracking",
             "exit":"exit"
      }
-def libraries(command):
 
+def libraries(command):
     return command not in lib_list.keys()
 
-def showdam():
+def str_to_class(classname):
+    return getattr(sys.modules[__name__], classname)
+
+def main():
     counter = 1
     try:
         counter = counter + 1
@@ -56,19 +56,20 @@ def showdam():
         while(True):
             time.sleep(0.1)
             command = input("\n[~] \033[92mYour wish is my command > \033[0m ").split()
-            if(len(command) == 0 or len(command) > 2 or libraries(command[0])):  # not 2 or cannot find first command
+            if(len(command) == 0 or len(command) > 2 or libraries(command[0])):  # Invalid Commands
                 print ("\n\t \033[1;91mInvalid Command \033[0m ")
-            elif(command[0] == "help"):
-                for item in lib_list:
-                    print("\t\033[1;91m{:<20}  {:<35}\033[0m".format(item, lib_list[item]))
-            elif(command[0] == "metadata"):
-                temp = Alan()
-                method_to_call = getattr(temp, "metadata")
-                result = method_to_call(command[1])
-            elif(command[0] == "exit"):
-                break
             else:
-                print ("\n\t \033[1;91mInvalid Command \033[0m ")
+                if(command[0] == "help"):
+                    for item in lib_list:
+                        print("\t\033[1;91m{:<20}  {:<35}\033[0m".format(item, lib_list[item]))
+                elif(command[0] == "exit"):
+                    break
+                else:
+                    try:    # make sure the module is capitalize and method in module is lower case
+                        method_to_call = getattr(str_to_class(command[0].capitalize()), command[0])
+                        result = method_to_call(command[1])
+                    except:
+                        print ("\n\t \033[1;91mInvalid Command \033[0m ")
 
 
     except KeyboardInterrupt:
@@ -81,23 +82,7 @@ def showdam():
 
     print ("\n\n\t\033[1;91mNOKI's Realm I like to See Ya, Hacking \033[0m😃\n\n")
 
-def metadata(filename):
-    try:
-        zf = zipfile.ZipFile(filename)
-        for name in zf.namelist():
-            if 'docProps/app.xml' in name:
-                root = ET.fromstring(zf.read(name))
-                for child in root:
-                    if('Application' in str(re.sub(r'\{[^()]*\}', '', child.tag))):
-                        if('Microsoft Office Word' in child.text):
-                            main(filename)
-    except:
-        print("Error with input file")
-
-
-# =====# Main #===== #
 if __name__ == "__main__":
-    showdam()
-    # print ("\n\t \033[1;91mN00b! N00b! N00b! " + "Testing \033[0m ")
+    main()
     # code template source: https://github.com/BullsEye0/shodan-eye
     # 
