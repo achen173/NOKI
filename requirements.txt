@@ -1,3 +1,0 @@
-shodan
-PyExifTool
-OleFileIO_PL==0.30
