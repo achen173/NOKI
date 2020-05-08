@@ -99,3 +99,5 @@ def metadata(filename):
 if __name__ == "__main__":
     showdam()
     # print ("\n\t \033[1;91mN00b! N00b! N00b! " + "Testing \033[0m ")
+    # code template source: https://github.com/BullsEye0/shodan-eye
+    # 
