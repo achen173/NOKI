@@ -24,4 +24,5 @@ pip3 install -r requirements.txt
 python3 main.py
 ```
 ## Example
-![](https://github.com/achen173/NOKI/blob/master/Images/Interface.PNG)
+![](https://github.com/achen173/NOKI/blob/master/Images/Interface2.PNG)
+![](https://github.com/achen173/NOKI/blob/master/Images/Interface3.PNG)
