@@ -2,8 +2,8 @@ import os
 import random
 import time
 import sys
-from metadata import Metadata
-
+from Library.extract_metadata import Metadata
+from Library.dict_attack_zip import Attack_zip
 logo = ("""
 
 \033[1;31m
@@ -37,8 +37,9 @@ print("\n\n\n\n\n", logo)
 
 time.sleep(0.1)
 lib_list = {"help": "list of valid commands",
-            "metadata":"parsing file(docx/pptx/xlsx)",
-            "aircrack-ng":"wireless password cracking",
+            "metadata":"parsing file(docx/pptx/xlsx)\n\t\t\t\t arg 1: file",
+            "attack_zip":"password attack for zip file\n\t\t\t\t arg 1: zipfile \n\t\t\t\t arg 2: passwordlist (optional)",
+            "aircrack-ng":"wireless password cracking (in progress)",
             "exit":"exit"
      }
 
@@ -55,19 +56,22 @@ def main():
         print("\n \033[1;31mType help to list current capabilities\033[0m ")
         while(True):
             time.sleep(0.1)
-            command = input("\n[~] \033[92mYour wish is my command > \033[0m ").split()
-            if(len(command) == 0 or len(command) > 2 or libraries(command[0])):  # Invalid Commands
+            command = input("\n[~] \033[92mYour wish is my command > \033[0m ").split() # the max command = 3
+            if(len(command) == 0 or len(command) > 3 or libraries(command[0])):  # Invalid Commands
                 print ("\n\t \033[1;91mInvalid Command \033[0m ")
             else:
                 if(command[0] == "help"):
                     for item in lib_list:
-                        print("\t\033[1;91m{:<20}  {:<35}\033[0m".format(item, lib_list[item]))
+                        print("\t\033[1;91m - {:<20}  {:<35}\033[0m".format(item, lib_list[item]))
                 elif(command[0] == "exit"):
                     break
                 else:
                     try:    # make sure the module is capitalize and method in module is lower case
                         method_to_call = getattr(str_to_class(command[0].capitalize()), command[0])
-                        result = method_to_call(command[1])
+                        if len(command) == 2:
+                            result = method_to_call(command[1])
+                        else:
+                            result = method_to_call(command[1], command[2])
                     except:
                         print ("\n\t \033[1;91mInvalid Command \033[0m ")
 
